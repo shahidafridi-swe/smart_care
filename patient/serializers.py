@@ -20,7 +20,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'password', 'confirm_password']
-        
     
     def save(self):
         username = self.validated_data['username']
@@ -40,3 +39,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account.is_active = False
         account.save()
         return account
+    
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+    
